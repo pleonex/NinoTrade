@@ -1,5 +1,5 @@
 ﻿//
-//  Program.cs
+//  FamiliarInfo.cs
 //
 //  Author:
 //       Benito Palacios Sánchez (aka pleonex) <benito356@gmail.com>
@@ -18,31 +18,22 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using Xwt;
-
 namespace NinoTrade
 {
-    public static class Program
+    public struct FamiliarInfo
     {
-        [STAThread]
-        public static void Main()
-        {
-            Application.Initialize(ToolkitType.Gtk);
-            Application.UnhandledException += ApplicationException;
+        public string Name { get; set; }
+        public int Level   { get; set; }
+        public Brand Brand { get; set; }
+        public int InternalIndex { get; set; }
 
-            var mainWindow = new MainWindow();
-            mainWindow.Show();
-            Application.Run();
-
-            mainWindow.Dispose();
-            Application.Dispose();
-        }
-
-        private static void ApplicationException (object sender, ExceptionEventArgs e)
-        {
-            MessageDialog.ShowError("Unknown error.\n" +
-                "Please contact with the developer.\n" + e.ErrorException);
-        }
+        public int Health  { get; set; }
+        public int Magic   { get; set; }
+        public int Attack  { get; set; }
+        public int Defense { get; set; }
+        public int MagicAttack  { get; set; }
+        public int MagicDefense { get; set; }
+        public int Ability { get; set; }
     }
 }
+

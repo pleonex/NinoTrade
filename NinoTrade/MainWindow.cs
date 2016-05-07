@@ -26,6 +26,11 @@ namespace NinoTrade
 {
     public class MainWindow : Window
     {
+        private FamiliarInfoView familiarInfoView;
+        private Button importButton;
+        private Button validateButton;
+        private TextEntry textCode;
+
         public MainWindow()
         {
             CreateComponents();
@@ -34,35 +39,65 @@ namespace NinoTrade
         private void CreateComponents()
         {
             Width  = 750;
-            Height = 400;
-            Title  = string.Format("NinoTrade");
+            Height = 350;
+            Title  = "NinoTrade ~~ GradienWords";
 
             var mainContent = new VBox();
             mainContent.BackgroundColor = Colors.White;
 
             var label = new Label {
-                Text = "Introduce el código",
+                Text = "NinoTrade",
                 MarginTop = 10,
                 TextColor = Colors.SaddleBrown,
                 Font = Font.SystemFont.WithSize(20).WithWeight(FontWeight.Bold)
             };
-            mainContent.PackStart(label, false, WidgetPlacement.End, WidgetPlacement.Center);
+            mainContent.PackStart(label, false, hpos: WidgetPlacement.Center);
 
-            var textEntry = new TextEntry {
+            textCode = new TextEntry {
                 HeightRequest = 50,
                 MarginLeft = 10,
                 MarginRight = 10,
-                Font = Font.SystemFont.WithSize(20).WithWeight(FontWeight.Bold)
+                Font = Font.SystemFont.WithSize(20).WithWeight(FontWeight.Bold),
+                PlaceholderText = "Escribe aquí el código del únimo..."
             };
-            mainContent.PackStart(textEntry, false);
+            mainContent.PackStart(textCode, false);
 
+            // Unimo stats and import button
+            var middleBox = new HBox { HeightRequest = 250 };
+            middleBox.MarginLeft = 10;
+            middleBox.MarginRight = 10;
+            middleBox.MarginTop = 20;
 
-            mainContent.PackStart(new HBox() { HeightRequest = 200 }, true);
+            var verticalBox = new VBox();
+            validateButton = new Button("Validar");
+            validateButton.HeightRequest = 50;
+            validateButton.Clicked += ValidateClicked;
+            verticalBox.PackStart(validateButton, true, WidgetPlacement.Center);
+
+            importButton = new Button("¡Canjear!");
+            importButton.Sensitive = false;
+            importButton.HeightRequest = 50;
+            importButton.Clicked += ImportClicked;
+            verticalBox.PackStart(importButton, true, WidgetPlacement.Start);
+
+            middleBox.PackStart(verticalBox, true);
+            familiarInfoView = new FamiliarInfoView();
+            middleBox.PackStart(familiarInfoView, true, hpos: WidgetPlacement.End);
+            mainContent.PackStart(middleBox, false);
 
             Content = mainContent;
-
             Padding = new WidgetSpacing();
             CloseRequested += WindowCloseRequested;
+        }
+
+        private void ValidateClicked(object sender, EventArgs e)
+        {
+            MessageDialog.ShowMessage("Nada por ahora");
+        }
+
+        private void ImportClicked(object sender, EventArgs e)
+        {
+            MessageDialog.ShowMessage("Nada por ahora");
         }
 
         private void WindowCloseRequested(object sender, CloseRequestedEventArgs args)

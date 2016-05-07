@@ -43,5 +43,8 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="MainWindow.cs" />
+    <Compile Include="FamiliarInfo.cs" />
+    <Compile Include="Brand.cs" />
+    <Compile Include="FamiliarInfoView.cs" />
   </ItemGroup>
 </Project>
