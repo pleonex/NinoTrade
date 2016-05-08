@@ -127,6 +127,8 @@ namespace NinoTrade
 
             try {
                 var code = KeyDecoder.Decode(textCode.Text);
+                var info = FamiliarInfoConveter.Convert(code);
+                familiarInfoView.Info = info;
             } catch {
                 MessageDialog.ShowError("Código inválido",
                     "Error al descifrar la clave. Revisa el código.");
