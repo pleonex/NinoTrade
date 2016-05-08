@@ -62,6 +62,25 @@ namespace NinoTrade
             };
             mainContent.PackStart(textCode, false);
 
+            // Symbol buttons
+            var symbolButtons = new HBox();
+            symbolButtons.MarginLeft = 10;
+            symbolButtons.MarginRight = 10;
+            symbolButtons.PackStart(CreateSymbolButton("☆"));
+            symbolButtons.PackStart(CreateSymbolButton("✭"));
+            symbolButtons.PackStart(CreateSymbolButton("○"));
+            symbolButtons.PackStart(CreateSymbolButton("●"));
+            symbolButtons.PackStart(CreateSymbolButton("◎"));
+            symbolButtons.PackStart(CreateSymbolButton("◇"));
+            symbolButtons.PackStart(CreateSymbolButton("◆"));
+            symbolButtons.PackStart(CreateSymbolButton("□"));
+            symbolButtons.PackStart(CreateSymbolButton("■"));
+            symbolButtons.PackStart(CreateSymbolButton("△"));
+            symbolButtons.PackStart(CreateSymbolButton("▲"));
+            symbolButtons.PackStart(CreateSymbolButton("▽"));
+            symbolButtons.PackStart(CreateSymbolButton("▼"));
+            mainContent.PackStart(symbolButtons, false, hpos: WidgetPlacement.Center);
+
             // Unimo stats and import button
             var middleBox = new HBox { HeightRequest = 250 };
             middleBox.MarginLeft = 10;
@@ -88,6 +107,14 @@ namespace NinoTrade
             Content = mainContent;
             Padding = new WidgetSpacing();
             CloseRequested += WindowCloseRequested;
+        }
+
+        private Button CreateSymbolButton(string symbol)
+        {
+            var button = new Button(symbol);
+            button.WidthRequest = 35;
+            button.Clicked += (sender, e) => textCode.Text += symbol;
+            return button;
         }
 
         private void ValidateClicked(object sender, EventArgs e)

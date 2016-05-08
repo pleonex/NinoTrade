@@ -32,7 +32,7 @@ namespace NinoTrade
         private static readonly string Alphabet2 = "!#$%&()*+,-./0123456789:;<=>?@" +
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]" +
                 "_abcdefghijklmnopqrstuvwxyz{|}" +
-                "~";  // TODO: Missing symbol chars
+                "~☆✭○●◎◇◆□■△▲▽▼";
 
         public static int KeyLength { get { return 44; } }
 
@@ -194,11 +194,11 @@ namespace NinoTrade
             // XOR Out: 0xFFFF
             // Check: 0xD64E
             // Name: CRC-16/GENIBUS
-            ushort crc = 0xFFFF;
+            long crc = 0xFFFF;
             for (int i = 0; i < length; i++) {
-                crc ^= (ushort)(data[i] << 8);
+                crc ^= data[i] << 8;
                 for (int nbits = 8; nbits > 0; nbits--)
-                    crc = (ushort)((crc & 0x8000) != 0 ? (crc << 1) ^ 0x1021 : crc << 1);
+                    crc = ((crc & 0x8000) != 0 ? (crc << 1) ^ 0x1021 : crc << 1);
             }
 
             return (ushort)(crc ^ 0xFFFF);
