@@ -92,7 +92,18 @@ namespace NinoTrade
 
         private void ValidateClicked(object sender, EventArgs e)
         {
-            MessageDialog.ShowMessage("Nada por ahora");
+            if (textCode.Text.Length != KeyDecoder.KeyLength) {
+                MessageDialog.ShowError("Código inválido",
+                    "Longitud de la clave inválida.");
+                return;
+            }
+
+            try {
+                var code = KeyDecoder.Decode(textCode.Text);
+            } catch {
+                MessageDialog.ShowError("Código inválido",
+                    "Error al descifrar la clave. Revisa el código.");
+            }
         }
 
         private void ImportClicked(object sender, EventArgs e)

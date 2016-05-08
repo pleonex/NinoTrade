@@ -46,5 +46,6 @@
     <Compile Include="FamiliarInfo.cs" />
     <Compile Include="Brand.cs" />
     <Compile Include="FamiliarInfoView.cs" />
+    <Compile Include="KeyDecoder.cs" />
   </ItemGroup>
 </Project>
