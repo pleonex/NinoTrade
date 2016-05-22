@@ -39,6 +39,8 @@
       <HintPath>..\xwt\Xwt.Gtk\bin\Release\Xwt.Gtk.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -48,9 +50,12 @@
     <Compile Include="FamiliarInfoView.cs" />
     <Compile Include="KeyDecoder.cs" />
     <Compile Include="BitReader.cs" />
-    <Compile Include="FamiliarInfoConveter.cs" />
+    <Compile Include="FamiliarInfoConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="FamiliarInfo\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ImagenParam.xml" />
   </ItemGroup>
 </Project>

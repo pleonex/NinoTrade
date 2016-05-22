@@ -126,7 +126,7 @@ namespace NinoTrade
         {
             try {
                 var code = KeyDecoder.Decode(textCode.Text);
-                var info = FamiliarInfoConveter.Convert(code);
+                var info = FamiliarInfoConverter.Convert(code);
                 familiarInfoView.Info = info;
                 importButton.Sensitive = true;
             } catch (Exception ex) {

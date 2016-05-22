@@ -31,7 +31,7 @@ namespace NinoTrade
 1. **Nombre**: {0}  
 2. **Nivel**: {1}  
 3. **Naturaleza**: {2}  
-4. **Índice interno**: {3}  
+4. **Familia**: {3}  
 5. **Estadísticas**:  
   1. **PV**: {4}  
   2. **PM**: {5}  
@@ -66,7 +66,7 @@ namespace NinoTrade
                 info.Name,
                 info.Level,
                 info.Brand.ToName(),
-                info.InternalIndex,
+                info.Family,
                 info.Health,
                 info.Magic,
                 info.Attack,

@@ -34,6 +34,8 @@ namespace NinoTrade
         public int MagicAttack  { get; set; }
         public int MagicDefense { get; set; }
         public int Ability { get; set; }
+
+        public string Family { get; set; }
     }
 }
 
