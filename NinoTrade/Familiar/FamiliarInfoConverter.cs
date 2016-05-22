@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Xml.Linq;
 using NinoTrade.Decoder;
+using System.IO;
 
 namespace NinoTrade.Familiar
 {
@@ -45,7 +46,7 @@ namespace NinoTrade.Familiar
             stream.Dispose();
         }
 
-        public static FamiliarInfo Convert(byte[] data)
+        public static FamiliarInfo FromKey(byte[] data)
         {
             var reader = new BitReader(data);
             var info = new FamiliarInfo();
@@ -63,6 +64,39 @@ namespace NinoTrade.Familiar
             info.Ability = reader.ReadBits(7) * 8;                  // Max: 128*8 = 1024
             info.Family = FamiliarNames[info.InternalIndex];
             // Next 11 bits is the random number.
+
+            return info;
+        }
+
+        public static FamiliarInfo FromSave(Stream data)
+        {
+            var basePos = data.Position;
+            var reader = new BinaryReader(data);
+            var info = new FamiliarInfo();
+
+            data.Position = basePos + 0x56;
+            info.Name = new string(reader.ReadChars(4)).Replace("\0", "");
+
+            data.Position = basePos + 0x1F;
+            info.Level = reader.ReadSByte();
+
+            data.Position = basePos + 0x24;
+            info.Brand = (Brand)((reader.ReadUInt32() >> 25) & 0x7);
+
+            data.Position = basePos + 0x46;
+            info.InternalIndex = reader.ReadUInt16();
+            info.Family = FamiliarNames[info.InternalIndex];
+
+            data.Position = basePos + 0x12;
+            info.Health = reader.ReadUInt16();
+            info.Magic = reader.ReadUInt16();
+
+            data.Position = basePos + 0x08;
+            info.Attack = reader.ReadUInt16();
+            info.Defense = reader.ReadUInt16();
+            info.MagicAttack = reader.ReadUInt16();
+            info.MagicDefense = reader.ReadUInt16();
+            info.Ability = reader.ReadUInt16();
 
             return info;
         }

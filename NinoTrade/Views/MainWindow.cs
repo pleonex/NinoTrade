@@ -23,6 +23,7 @@ using Xwt;
 using Xwt.Drawing;
 using NinoTrade.Decoder;
 using NinoTrade.Familiar;
+using NinoTrade.Save;
 
 namespace NinoTrade.Views
 {
@@ -128,7 +129,7 @@ namespace NinoTrade.Views
         {
             try {
                 var code = KeyDecoder.Decode(textCode.Text);
-                var info = FamiliarInfoConverter.Convert(code);
+                var info = FamiliarInfoConverter.FromKey(code);
                 familiarInfoView.Info = info;
                 importButton.Sensitive = true;
             } catch (Exception ex) {
@@ -140,6 +141,13 @@ namespace NinoTrade.Views
 
         private void ImportClicked(object sender, EventArgs e)
         {
+            var dialog = new OpenFileDialog("Selecciona el archivo de partida (save)");
+            if (!dialog.Run(this))
+                return;
+
+            var save = new GameSave(dialog.FileName);
+            save.Read();
+
             MessageDialog.ShowMessage("Nada por ahora");
         }
 
