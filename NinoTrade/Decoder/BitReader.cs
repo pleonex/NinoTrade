@@ -21,7 +21,7 @@
 using System.Text;
 
 
-namespace NinoTrade
+namespace NinoTrade.Decoder
 {
     public class BitReader
     {

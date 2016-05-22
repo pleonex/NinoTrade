@@ -21,8 +21,10 @@
 using System;
 using Xwt;
 using Xwt.Drawing;
+using NinoTrade.Decoder;
+using NinoTrade.Familiar;
 
-namespace NinoTrade
+namespace NinoTrade.Views
 {
     public class MainWindow : Window
     {

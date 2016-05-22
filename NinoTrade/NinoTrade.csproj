@@ -44,16 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
-    <Compile Include="MainWindow.cs" />
-    <Compile Include="FamiliarInfo.cs" />
-    <Compile Include="Brand.cs" />
-    <Compile Include="FamiliarInfoView.cs" />
-    <Compile Include="KeyDecoder.cs" />
-    <Compile Include="BitReader.cs" />
-    <Compile Include="FamiliarInfoConverter.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="FamiliarInfo\" />
+    <Compile Include="Views/MainWindow.cs" />
+    <Compile Include="Familiar\FamiliarInfo.cs" />
+    <Compile Include="Familiar\Brand.cs" />
+    <Compile Include="Views/FamiliarInfoView.cs" />
+    <Compile Include="Decoder/KeyDecoder.cs" />
+    <Compile Include="Decoder/BitReader.cs" />
+    <Compile Include="Familiar\FamiliarInfoConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ImagenParam.xml" />

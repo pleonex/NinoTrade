@@ -21,8 +21,9 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Xml.Linq;
+using NinoTrade.Decoder;
 
-namespace NinoTrade
+namespace NinoTrade.Familiar
 {
     public static class FamiliarInfoConverter
     {
