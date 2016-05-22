@@ -29,16 +29,17 @@ namespace NinoTrade
     {
         private static readonly string Alphabet1 = "0123456789abcdefghijkmnpqrstuvwxyz" + 
             "ABCDEFGHJKLMNPQRSTUVWXYZ";
-        private static readonly string Alphabet2 = "!#$%&()*+,-./0123456789:;<=>?@" +
-                "ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]" +
-                "_abcdefghijklmnopqrstuvwxyz{|}" +
-                "~☆✭○●◎◇◆□■△▲▽▼";
+        private static readonly string[] Alphabet2 = { "!#", "$%", "&(", ")*", "+,", "-.",
+            "/0", "12", "34", "56", "78", "9:", ";<", "=>", "?@", "AB", "CD", "EF", "GH",
+            "IJ", "KL", "MN", "OP", "QR", "ST", "UV", "WX", "YZ", "[\\", "]_", "ab", "cd",
+            "ef", "gh", "ij", "kl", "mn", "op", "qr", "st", "uv", "wx", "yz", "{|", "}~",
+            "☆", "✭", "○", "●", "◎", "◇", "◆", "□", "■", "△", "▲", "▽", "▼" };
 
-        public static int KeyLength { get { return 44; } }
+        public static int KeyLength { get { return 22; } }
 
         public static byte[] Decode(string input)
         {
-            if (input.Length != KeyLength)
+            if (!IsValid(input))
                 throw new ArgumentException("Invalid input length", "input");
 
             // From alphabet 2 to alphabet 1.
@@ -69,6 +70,34 @@ namespace NinoTrade
             return key.Reverse().ToArray();
         }
 
+        public static IEnumerable<string> ReadKey(string key)
+        {
+            int idx = 0;
+            while (idx < key.Length) {
+                char ch = key[idx++];
+                yield return ch + (ch < 0x80 ? key[idx++].ToString() : "");
+            }
+
+            yield break;
+        }
+
+        public static bool IsValid(string key)
+        {
+            int count = 0;
+            foreach (var symbol in ReadKey(key)) {
+                int idx = Array.IndexOf(Alphabet2, symbol);
+
+                // If the char is not in the alphabet return.
+                if (idx == -1)
+                    return false;
+
+                // If it's a symbol count two, otherwise one.
+                count++;
+            }
+
+            return count == KeyLength;
+        }
+
         /// <summary>
         /// Convert the string from alphabet 2 representation to alphabet 1.
         /// </summary>
@@ -83,9 +112,8 @@ namespace NinoTrade
             const int Step = 2;
             var alphabet1Key = new StringBuilder();
 
-            for (int i = 0; i < input.Length; i += Step) {
-                string ch = input.Substring(i, Step);
-                int idx = Alphabet2.IndexOf(ch) / Step;
+            foreach (string symbol in ReadKey(input)) {
+                int idx = Array.IndexOf(Alphabet2, symbol);
                 alphabet1Key.Append(Alphabet1[idx]);
             }
 

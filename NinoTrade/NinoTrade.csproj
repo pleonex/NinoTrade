@@ -50,4 +50,7 @@
     <Compile Include="BitReader.cs" />
     <Compile Include="FamiliarInfoConveter.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="FamiliarInfo\" />
+  </ItemGroup>
 </Project>

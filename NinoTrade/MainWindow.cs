@@ -113,25 +113,26 @@ namespace NinoTrade
         {
             var button = new Button(symbol);
             button.WidthRequest = 35;
-            button.Clicked += (sender, e) => textCode.Text += symbol;
+            button.Clicked += delegate {
+                textCode.Text += symbol;
+                textCode.SetFocus();
+                textCode.SelectionStart = textCode.Text.Length;
+                textCode.SelectionLength = 0;
+            };
             return button;
         }
 
         private void ValidateClicked(object sender, EventArgs e)
         {
-            if (textCode.Text.Length != KeyDecoder.KeyLength) {
-                MessageDialog.ShowError("Código inválido",
-                    "Longitud de la clave inválida.");
-                return;
-            }
-
             try {
                 var code = KeyDecoder.Decode(textCode.Text);
                 var info = FamiliarInfoConveter.Convert(code);
                 familiarInfoView.Info = info;
-            } catch {
+                importButton.Sensitive = true;
+            } catch (Exception ex) {
+                importButton.Sensitive = false;
                 MessageDialog.ShowError("Código inválido",
-                    "Error al descifrar la clave. Revisa el código.");
+                    "Error al descifrar la clave. Revisa el código.\n" + ex.Message);
             }
         }
 
