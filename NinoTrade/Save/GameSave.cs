@@ -65,6 +65,38 @@ namespace NinoTrade.Save
                 save.Position = 0x29AC + 0x64 * (idx - 0x10);
                 equip.Add(FamiliarInfoConverter.FromSave(save));
             }
+
+            // Get indexes for refugio familiars.
+            save.Position = 0xC5F0;
+            var refugreesIdx = new List<ushort>();
+
+            const int MaxRefugees = 0x190;
+            for (int i = 0; i < MaxRefugees; i++) {
+                ushort idx = reader.ReadUInt16();
+                // If we found -1 then there aren't more familiars.
+                if (idx == 0xFFFF)
+                    break;
+                // Skip the familiars already in the equip.
+                if (equipIdx.Contains(idx))
+                    continue;
+                refugreesIdx.Add(idx);
+            }
+
+            // Read the information from the refugees members.
+            foreach (var idx in refugreesIdx) {
+                save.Position = 0x29AC + 0x64 * (idx - 0x10);
+                refugees.Add(FamiliarInfoConverter.FromSave(save));
+            }
+        }
+
+        public bool IsEquipFull()
+        {
+            return equip.Count >= 18;
+        }
+
+        public bool IsRefugeeFull()
+        {
+            return refugees.Count + equip.Count >= 0x190;
         }
     }
 }

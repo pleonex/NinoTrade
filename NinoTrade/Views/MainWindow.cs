@@ -148,6 +148,17 @@ namespace NinoTrade.Views
             var save = new GameSave(dialog.FileName);
             save.Read();
 
+            if (save.IsRefugeeFull()) {
+                MessageDialog.ShowError(
+                    "Refugio lleno",
+                    "El refugio de únimos está lleno. No se puede añadir más únimos.");
+                return;
+            } else if (save.IsEquipFull()) {
+                MessageDialog.ShowMessage(
+                    "Equipo completo",
+                    "Tu equipo está completo, añadiendo al refugio.");
+            }
+
             MessageDialog.ShowMessage("Nada por ahora");
         }
 
