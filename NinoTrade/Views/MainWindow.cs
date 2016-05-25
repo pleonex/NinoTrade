@@ -146,7 +146,12 @@ namespace NinoTrade.Views
                 return;
 
             var save = new GameSave(dialog.FileName);
-            save.Read();
+            try {
+                save.Read();
+            } catch (Exception ex) {
+                MessageDialog.ShowError("Partida inválida", ex.Message);
+                return;
+            }
 
             if (save.IsRefugeeFull()) {
                 MessageDialog.ShowError(

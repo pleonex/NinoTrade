@@ -48,7 +48,7 @@ namespace NinoTrade.Save
         {
             var validHash = SaveHash.Compute(save);
             var saveHash = SaveHash.GetFromStream(save);
-            if (validHash.SequenceEqual(saveHash))
+            if (!validHash.SequenceEqual(saveHash))
                 throw new FormatException("Invalid save file");
 
             var reader = new BinaryReader(save);

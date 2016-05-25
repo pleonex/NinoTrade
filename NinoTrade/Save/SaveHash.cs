@@ -44,10 +44,12 @@ namespace NinoTrade.Save
             sha1.TransformBlock(buffer, 0, buffer.Length, buffer, 0);
 
             // Add password
+            stream.Read(new byte[4], 0, 4);
             sha1.TransformBlock(Password, 0, Password.Length, Password, 0);
 
             // Add the rest of the save
             buffer = new byte[HashStart - (PasswordOffset + Password.Length)];
+            stream.Read(buffer, 0, buffer.Length);
             sha1.TransformFinalBlock(buffer, 0, buffer.Length);
 
             return sha1.Hash;
