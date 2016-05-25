@@ -52,6 +52,7 @@
     <Compile Include="Decoder\KeyDecoder.cs" />
     <Compile Include="Decoder\BitReader.cs" />
     <Compile Include="Save\GameSave.cs" />
+    <Compile Include="Save\SaveHash.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\ImagenParam.xml" />

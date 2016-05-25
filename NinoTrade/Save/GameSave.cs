@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using NinoTrade.Familiar;
 
 namespace NinoTrade.Save
@@ -45,7 +46,11 @@ namespace NinoTrade.Save
 
         public void Read()
         {
-            // TODO: Check checksum.
+            var validHash = SaveHash.Compute(save);
+            var saveHash = SaveHash.GetFromStream(save);
+            if (validHash.SequenceEqual(saveHash))
+                throw new FormatException("Invalid save file");
+
             var reader = new BinaryReader(save);
 
             // First read the familiars in the equip. Skip if it's a player (index < 0x10)
